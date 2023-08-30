@@ -1,4 +1,6 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import dotenv from 'dotenv'
+dotenv.config();
 
 
 const mongooseOptions = {
@@ -21,7 +23,8 @@ export const db =
 // };
 async (): Promise<void> => {
     try {
-      await mongoose.connect('mongodb://127.0.0.1:27017/passwordGenerator', mongooseOptions)
+      // await mongoose.connect('mongodb://127.0.0.1:27017/passwordGenerator', mongooseOptions)
+      await mongoose.connect(String(process.env.MONGO_DB_URL), mongooseOptions)
       console.log("Connected to database");
     } catch (error) {
       console.error("Failed to connect to database:", error);
